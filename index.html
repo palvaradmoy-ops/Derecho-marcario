@@ -1814,6 +1814,164 @@
       .outcome:nth-child(2) h3{font-size:26.5px}
     }
 
+
+    /* =========================================================
+       V14 — RESPONSIVE STABILITY / NO-OVERLAP PASS
+       Keeps the approved desktop art direction while reserving
+       independent text/image zones on phones and compact devices.
+       ========================================================= */
+
+    /* Header: flex children are explicitly shrink-safe. */
+    .topbar .shell{min-width:0}
+    .brand{flex:1 1 auto;min-width:0;overflow:hidden}
+    .brand-lockup{min-width:0;max-width:100%}
+    .header-actions{flex:0 0 auto}
+
+    @media(max-width:820px){
+      /* Safe areas + a header that cannot collide at narrow widths. */
+      :root{--header-h:68px}
+      .topbar{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+      .topbar .shell{width:calc(100% - 24px);gap:8px}
+      .brand-word{font-size:23px;line-height:1}
+      .brand-sub{
+        max-width:calc(100vw - 150px);font-size:8px;line-height:1.18;
+        letter-spacing:.075em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+      }
+      .header-actions{gap:7px}
+      .sound-toggle,.menu-toggle{width:44px;min-width:44px;height:44px;padding:0}
+
+      /* Hero: separate, non-intersecting text and portrait zones. */
+      .hero{padding-top:var(--header-h)}
+      .hero-shell{min-height:calc(100svh - var(--header-h));position:relative}
+      .hero-copy{
+        min-height:calc(100svh - var(--header-h));
+        padding-top:38px;
+        padding-left:max(16px,env(safe-area-inset-left));
+        padding-right:max(16px,env(safe-area-inset-right));
+        padding-bottom:42px
+      }
+      .hero-kicker{width:49%;max-width:49%;gap:8px;font-size:9px;letter-spacing:.16em}
+      .hero-kicker .longline{width:24px}
+      .hero-title{
+        width:48%;max-width:48%;
+        margin-top:25px;
+        font-size:clamp(46px,12.6vw,54px);
+        line-height:.86;
+        letter-spacing:-.055em
+      }
+      .hero-title .line{overflow:visible}
+      .hero-title em{
+        width:100%;max-width:100%;
+        margin-top:.56em;
+        font-size:.315em;line-height:1.13;
+        white-space:normal;text-wrap:balance
+      }
+      .hero-visual{
+        position:absolute;
+        top:54px;right:max(14px,env(safe-area-inset-right));
+        width:44%;height:286px;min-height:0;
+        overflow:hidden;z-index:2
+      }
+      .hero-photo-frame{inset:0}
+      .hero-photo{object-position:50% 8%}
+      .hero-law{top:8px;right:7px;bottom:auto;width:88px;padding:8px 7px}
+      .hero-law b{font-size:14px}
+      .hero-law .law-mobile{font-size:7.8px;line-height:1.35}
+      .hero-teacher-badge{left:7px;right:7px;bottom:7px;padding:7px 8px}
+      .hero-teacher-badge strong{font-size:11px}
+      .hero-teacher-badge span{font-size:8px;line-height:1.25;max-width:74%}
+      /* Reserve the portrait's full vertical footprint before prose/actions. */
+      .hero-hook{margin-top:150px;max-width:19em;font-size:clamp(22px,5.7vw,26px)}
+      .hero-actions,.hero-meta,.hero-status{position:relative;z-index:4}
+
+      /* The decorative 380 is removed on phones: information never competes with decoration. */
+      .closing::before{display:none}
+      .closing{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+      .countdown-luxe{width:100%;max-width:100%;padding:22px 0 24px;margin:36px auto 32px;overflow:hidden}
+      .countdown-caption{padding-inline:4px;margin-bottom:22px}
+      .countdown-display{display:block;width:100%;text-align:center}
+      .countdown-days{display:block;min-width:0;width:100%;text-align:center}
+      .countdown-days .count-label{padding:0;text-align:center}
+      .count-num-days{
+        display:block;width:100%;min-inline-size:0;
+        text-align:center !important;
+        font-size:clamp(76px,22vw,94px);line-height:.92
+      }
+      .countdown-rule{width:66px;height:1px;margin:20px auto}
+      .countdown-clock{
+        width:100%;max-width:340px;margin:0 auto;
+        display:grid;
+        grid-template-columns:minmax(0,1fr) 12px minmax(0,1fr) 12px minmax(0,1fr);
+        gap:3px;align-items:start
+      }
+      .countdown-clock .count-segment{min-width:0;width:100%}
+      .count-num{font-size:clamp(37px,11.4vw,48px);line-height:.96;letter-spacing:-.04em;min-inline-size:0}
+      .count-colon{font-size:27px;line-height:.96;padding-top:2px;transform:none}
+      .count-label{font-size:9px;line-height:1.25;letter-spacing:.095em;margin-top:9px;white-space:nowrap}
+      .countdown-state{max-width:100%;padding-inline:8px;margin-top:20px}
+    }
+
+    @media(max-width:430px){
+      .hero-kicker{width:50%;max-width:50%;font-size:8.7px}
+      .hero-title{width:49%;max-width:49%;font-size:clamp(45px,12.4vw,51px)}
+      .hero-visual{width:42.5%;height:276px;right:max(14px,env(safe-area-inset-right))}
+      .hero-hook{margin-top:146px}
+      .countdown-clock{max-width:326px}
+    }
+
+    @media(max-width:375px){
+      .topbar .shell{width:calc(100% - 20px)}
+      .brand-sub{max-width:165px;font-size:7.6px;letter-spacing:.055em}
+      .sound-toggle,.menu-toggle{width:42px;min-width:42px;height:42px}
+      .hero-kicker{width:51%;max-width:51%;font-size:8.4px}
+      .hero-kicker .longline{display:none}
+      .hero-title{width:50%;max-width:50%;font-size:45px}
+      .hero-title em{font-size:.305em}
+      .hero-visual{width:41.5%;height:260px;top:52px}
+      .hero-teacher-badge span{display:none}
+      .hero-hook{margin-top:132px;font-size:21.5px}
+      .count-num-days{font-size:74px}
+      .countdown-clock{max-width:304px}
+      .count-num{font-size:38px}
+      .count-label{font-size:8.4px;letter-spacing:.07em}
+    }
+
+    @media(max-width:350px){
+      .brand-sub{display:none}
+      .hero-kicker{width:52%;max-width:52%;font-size:8.1px}
+      .hero-title{width:51%;max-width:51%;font-size:42px}
+      .hero-visual{width:40%;height:238px;top:50px}
+      .hero-law{width:76px;padding:7px 5px}.hero-law b{font-size:12.5px}.hero-law .law-mobile{display:none}
+      .hero-hook{margin-top:116px;font-size:20px}
+      .countdown-clock{max-width:286px;grid-template-columns:minmax(0,1fr) 9px minmax(0,1fr) 9px minmax(0,1fr)}
+      .count-num{font-size:35px}.count-colon{font-size:23px}.count-label{font-size:8px}
+    }
+
+    /* Phones in landscape can be wider than the normal mobile breakpoint. */
+    @media(orientation:landscape) and (max-height:500px) and (max-width:950px){
+      :root{--header-h:60px}
+      .topbar{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+      .topbar .shell{width:calc(100% - 28px);gap:10px}
+      .nav,.header-cta{display:none}
+      .menu-toggle{display:inline-flex;width:42px;height:42px}
+      .sound-toggle{width:42px;min-width:42px;height:42px;padding:0}.sound-toggle .sound-label{display:none}
+      .brand{min-width:0}.brand-word{font-size:22px}.brand-sub{font-size:7.5px;max-width:240px;overflow:hidden;text-overflow:ellipsis}
+      .hero{padding-top:var(--header-h)}
+      .hero-shell{display:grid;grid-template-columns:minmax(0,54%) minmax(0,46%);min-height:calc(100svh - var(--header-h))}
+      .hero-copy{min-height:calc(100svh - var(--header-h));padding:28px 24px 38px max(24px,env(safe-area-inset-left))}
+      .hero-kicker{width:100%;max-width:100%;font-size:8.5px}
+      .hero-title{width:100%;max-width:100%;font-size:clamp(54px,8.1vw,70px);line-height:.82;margin-top:20px}
+      .hero-title em{white-space:normal;font-size:.29em;max-width:14em}
+      .hero-hook{margin-top:24px;font-size:20px;max-width:17em}
+      .hero-body{display:none}
+      .hero-actions{margin-top:18px}
+      .hero-meta{margin-top:18px}
+      .hero-visual{position:relative;top:auto;right:auto;width:100%;height:auto;min-height:calc(100svh - var(--header-h));overflow:hidden}
+      .hero-photo-frame{inset:10px 10px 0 0}
+      .hero-law{top:18px;right:18px}
+      .hero-teacher-badge{left:18px;right:18px;bottom:12px}
+    }
+
   </style>
 
   <noscript><style>
